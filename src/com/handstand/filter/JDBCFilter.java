@@ -15,8 +15,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
 import com.handstand.connection.MySQLConnectionUtils;
+import com.handstand.exception.Validation;
 import com.handstand.util.MyUtils;
-import com.handstand.validation.Validation;
 import com.mysql.jdbc.Connection;
 
 /**

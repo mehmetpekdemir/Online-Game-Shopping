@@ -22,14 +22,14 @@ import com.handstand.util.MyUtils;
 @WebServlet(urlPatterns = { "/adminInfo" })
 public class AdminInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String USER = "user";
+	private static final String ADMIN = "admin";
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
 		HttpSession session = request.getSession();
-		Admin loginedAdmin = (Admin) MyUtils.getLoginedUser(session);// Admin oturumu açtımı kontrol ediyorum.
+		Admin loginedAdmin = (Admin) MyUtils.getLoginedAdmin(session);// Admin oturumu açtımı kontrol ediyorum.
 
 		// Eğer admin dışında birisi direk sayfaya erişmek istersede kontrol edip o url
 		// yönlenmesini de engelliyorum.
@@ -38,8 +38,8 @@ public class AdminInfoServlet extends HttpServlet {
 			return;
 		}
 
-		request.setAttribute(USER, loginedAdmin);
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/userInfoView.jsp");
+		request.setAttribute(ADMIN, loginedAdmin);
+		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/adminInfoView.jsp");
 		dispatcher.forward(request, response);
 	}
 

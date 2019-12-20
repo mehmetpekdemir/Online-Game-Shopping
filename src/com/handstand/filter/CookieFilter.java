@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.handstand.entity.Admin;
-import com.handstand.service.AdminService;
+import com.handstand.service.impl.AdminServiceImpl;
 import com.handstand.util.MyUtils;
 import com.mysql.jdbc.Connection;
 
@@ -40,7 +40,7 @@ public class CookieFilter implements Filter {
 		HttpServletRequest request2 = (HttpServletRequest) request;
 		HttpSession session = request2.getSession();
 
-		Admin adminInSession = (Admin) MyUtils.getLoginedUser(session);
+		Admin adminInSession = (Admin) MyUtils.getLoginedAdmin(session);
 		if (adminInSession != null) {
 			session.setAttribute(COOKIE_CHECKED, CHECKED);
 			chain.doFilter(request, response);
@@ -53,9 +53,9 @@ public class CookieFilter implements Filter {
 		if (checked == null && connection != null) {
 			String emailAddress = MyUtils.getAdminNameInCookie(request2);
 			try {
-				AdminService adminService = new AdminService();
+				AdminServiceImpl adminService = new AdminServiceImpl();
 				Admin admin = adminService.findAdmin(emailAddress);
-				MyUtils.storeLoginedUser(session, admin);
+				MyUtils.storeLoginedAdmin(session, admin);
 			} catch (SQLException sqlException) {
 				sqlException.printStackTrace();
 			} catch (ClassNotFoundException classNotFoundException) {

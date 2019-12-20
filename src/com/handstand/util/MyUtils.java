@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import com.mysql.jdbc.Connection;
 import com.handstand.entity.Admin;
-import com.handstand.entity.User;
 
 /**
  * 
@@ -19,7 +18,7 @@ public class MyUtils {
 
 	public static final String ATT_NAME_CONNECTION = "ATTRIBUTE_FOR_CONNECTİON"; // Baglantı adı için gerekli
 	private static final String ATT_NAME_USER_MAIL = "ATTRIBUTE_FOR_STORE_USER_MAIL_IN_COOKIE";
-	private static final String USER = "user";
+	private static final String ADMIN = "admin";
 
 	public static void storeConnection(ServletRequest request, Connection connection) {
 		request.setAttribute(ATT_NAME_CONNECTION, connection);
@@ -30,14 +29,14 @@ public class MyUtils {
 		return connection;
 	}
 
-	// Giriş yapan kullanıcı oturumu
-	public static void storeLoginedUser(HttpSession session, User user) {
-		session.setAttribute(USER, user);
+	// Giriş yapan admin oturumu
+	public static void storeLoginedAdmin(HttpSession session, Admin admin) {
+		session.setAttribute(ADMIN, admin);
 	}
 
-	public static User getLoginedUser(HttpSession session) {
-		User user = (User) session.getAttribute(USER);
-		return user;
+	public static Admin getLoginedAdmin(HttpSession session) {
+		Admin admin = (Admin) session.getAttribute(ADMIN);
+		return admin;
 	}
 
 	// Giriş yapan admin cookie bilgisi süresi
@@ -66,4 +65,5 @@ public class MyUtils {
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
 	}
+
 }

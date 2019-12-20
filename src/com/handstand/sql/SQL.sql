@@ -101,3 +101,46 @@ CREATE TABLE `products` (
 
 
 
+--version 2.0 --
+
+--platform table
+
+CREATE TABLE `platforms` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PLATFORM_NAME` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `PLATFORM_NAME` (`PLATFORM_NAME`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+
+
+-- addresses table
+
+CREATE TABLE `addresses` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `CUSTOMERID` int(11) NOT NULL,
+  `ADDRESS_TITLE` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `ADDRESS_DETAIL` varchar(250) COLLATE utf8_turkish_ci NOT NULL,
+  `CITY` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `DISTRICT` varchar(50) COLLATE utf8_turkish_ci NOT NULL,
+  `POSTCODE` varchar(15) COLLATE utf8_turkish_ci NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `CUSTOMERID` (`CUSTOMERID`),
+  CONSTRAINT `addresses_ibfk_1` FOREIGN KEY (`CUSTOMERID`) REFERENCES `customers` (`USERID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+CREATE TABLE `admins` (
+  `USERID` int(11) NOT NULL,
+  PRIMARY KEY (`USERID`),
+  CONSTRAINT `admins_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `users` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+CREATE TABLE `customers` (
+  `USERID` int(11) NOT NULL,
+  `PHONENUMBER` varchar(20) COLLATE utf8_turkish_ci NOT NULL,
+  PRIMARY KEY (`USERID`),
+  CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `users` (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+
+--eklencek

@@ -14,14 +14,21 @@ import com.handstand.service.AdminService;
 
 public class AdminServiceImpl implements AdminService {
 
-	public Admin findAdmin(String adminUserName, String adminPassword) throws ClassNotFoundException, SQLException {
+	public Admin findAdmin(String emailAddress, String password) throws ClassNotFoundException, SQLException {
 		AdminDaoImpl adminDao = new AdminDaoImpl();
-		return adminDao.findAdmin(adminUserName, adminPassword);
+		return adminDao.findAdmin(emailAddress, password);
 	}
 
-	public Admin findAdmin(String adminUserName) throws ClassNotFoundException, SQLException {
+	public Admin findAdmin(String emailAddress) throws ClassNotFoundException, SQLException {
 		AdminDaoImpl adminDao = new AdminDaoImpl();
-		return adminDao.findAdmin(adminUserName);
+		return adminDao.findAdmin(emailAddress);
 	}
+
+	@Override
+	public void updateAdmin(Admin admin) throws ClassNotFoundException, SQLException {
+		AdminDaoImpl adminDao = new AdminDaoImpl();
+		adminDao.updateAdmin(admin);
+	}
+	
 
 }

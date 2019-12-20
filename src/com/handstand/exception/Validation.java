@@ -1,9 +1,10 @@
-package com.handstand.validation;
+package com.handstand.exception;
 
 import javax.servlet.ServletException;
 
 import com.handstand.connection.MySQLConnectionUtils;
 import com.mysql.jdbc.Connection;
+
 /**
  * 
  * @author MEHMET PEKDEMİR
@@ -16,5 +17,4 @@ public class Validation {
 		MySQLConnectionUtils.rollbackConnection(connection);
 		throw new ServletException();
 	}
-
 }
