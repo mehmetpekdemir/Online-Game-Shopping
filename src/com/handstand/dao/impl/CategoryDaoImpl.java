@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.handstand.connection.MySQLConnection;
-import com.handstand.dao.CategoryDaoImp;
+import com.handstand.dao.CategoryDao;
 import com.handstand.entity.Category;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -16,7 +16,7 @@ import com.mysql.jdbc.PreparedStatement;
  * @author MEHMET PEKDEMİR
  *
  */
-public class CategoryDaoImpl implements CategoryDaoImp {
+public class CategoryDaoImpl implements CategoryDao {
 
 	private static final String LIST_CATEGORY = "SELECT categories.ID,categories.PLATFORMID,"
 			+ "categories.CATEGORY_NAME,platforms.PLATFORM_NAME FROM categories "

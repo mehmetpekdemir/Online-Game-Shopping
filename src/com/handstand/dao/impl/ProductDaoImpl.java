@@ -8,7 +8,7 @@ import java.util.List;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.handstand.connection.MySQLConnection;
-import com.handstand.dao.ProductDaoImp;
+import com.handstand.dao.ProductDao;
 import com.handstand.entity.Product;
 
 /**
@@ -17,7 +17,7 @@ import com.handstand.entity.Product;
  *
  */
 
-public class ProductDaoImpl implements ProductDaoImp {
+public class ProductDaoImpl implements ProductDao {
 
 	private static final String LIST_PRODUCT = "SELECT platforms.PLATFORM_NAME,categories.CATEGORY_NAME,products.PRODUCT_NAME,"
 			+ "products.CODE,products.PRICE,products.STOCK_AMOUNT,products.IMAGE,products.DESCRIPTION "

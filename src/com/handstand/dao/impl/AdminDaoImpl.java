@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.handstand.connection.MySQLConnection;
-import com.handstand.dao.AdminDaoImp;
+import com.handstand.dao.AdminDao;
 import com.handstand.entity.Admin;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -15,7 +15,7 @@ import com.mysql.jdbc.PreparedStatement;
  *
  */
 
-public class AdminDaoImpl implements AdminDaoImp {
+public class AdminDaoImpl implements AdminDao {
 
 	// Parametreler kullandığımızdan ötürü sql injectiona kapalı tutmus
 	// olduk.

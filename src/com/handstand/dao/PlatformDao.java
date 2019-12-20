@@ -9,7 +9,7 @@ import com.handstand.entity.Platform;
  * @author MEHMET PEKDEMIR
  *
  */
-public interface PlatformDaoImp {
+public interface PlatformDao {
 
 	public List<Platform> listPlatform() throws ClassNotFoundException, SQLException;
 

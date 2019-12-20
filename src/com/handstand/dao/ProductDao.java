@@ -9,7 +9,7 @@ import com.handstand.entity.Product;
  * @author MEHMET PEKDEMİR
  *
  */
-public interface ProductDaoImp {
+public interface ProductDao {
 	
 	public List<Product> listProduct() throws ClassNotFoundException, SQLException;
 

@@ -10,8 +10,11 @@ import com.handstand.entity.Admin;
  *
  */
 public interface AdminDao {
-	public Admin findAdmin(String adminUserName, String adminPassword) throws ClassNotFoundException, SQLException;
+	
+	public Admin findAdmin(String emailAddress, String password) throws ClassNotFoundException, SQLException;
 
-	public Admin findAdmin(String adminUserName) throws ClassNotFoundException, SQLException;
+	public Admin findAdmin(String emailAddress) throws ClassNotFoundException, SQLException;
+	
+	public void updateAdmin(Admin admin)throws ClassNotFoundException, SQLException;
 
 }

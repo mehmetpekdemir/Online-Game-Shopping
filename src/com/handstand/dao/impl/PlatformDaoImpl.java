@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.handstand.connection.MySQLConnection;
-import com.handstand.dao.PlatformDaoImp;
+import com.handstand.dao.PlatformDao;
 import com.handstand.entity.Platform;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -16,7 +16,7 @@ import com.mysql.jdbc.PreparedStatement;
  * @author MEHMET PEKDEMİR
  *
  */
-public class PlatformDaoImpl implements PlatformDaoImp {
+public class PlatformDaoImpl implements PlatformDao {
 
 	private static final String LIST_PLATFORM = "SELECT platforms.ID,platforms.PLATFORM_NAME FROM platforms ORDER BY platforms.ID";
 	private static final String FIND_PLATFORM = "SELECT platforms.ID,platforms.PLATFORM_NAME FROM platforms WHERE platforms.ID =?";

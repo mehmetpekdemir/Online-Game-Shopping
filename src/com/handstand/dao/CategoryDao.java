@@ -10,7 +10,7 @@ import com.handstand.entity.Category;
  * @author MEHMET PEKDEMIR
  *
  */
-public interface CategoryDaoImp {
+public interface CategoryDao {
 
 	public List<Category> listCategory() throws ClassNotFoundException, SQLException;
 
