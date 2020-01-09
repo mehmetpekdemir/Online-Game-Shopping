@@ -7,8 +7,18 @@
 <title>Footer</title>
 </head>
 <body>
-	<div style="background: #E0E0E0; text-align: center; padding: 5px; margin-top: 10px;">
-  		@Copyright www.handstand.com
-	</div>
+	     <section class="mb-0 mt-0">
+        <div class="footer text-white">
+          <div class="   bg-dark pt-2 pb-2">
+            <div class="container">
+              <div class="row f-flex justify-content-center" style="">
+                <div class="col text-center  text-secondary my-1">
+                  <p class="mt-2  text-white"> © Copyright 2019 • www.handstand.com </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 </body>
 </html>

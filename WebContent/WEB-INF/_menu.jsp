@@ -1,4 +1,5 @@
 <%@page import="com.handstand.entity.Admin"%>
+<%@page import="com.handstand.entity.Customer"%>
 <%@page import="com.handstand.util.MyUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,15 +13,26 @@
 
 	<div style="padding: 5px;">
 		<a href="${pageContext.request.contextPath}/">Anasayfa</a> |
-		<a href="${pageContext.request.contextPath}/productList">Ürün Listesi</a>|
+		<a href="${pageContext.request.contextPath}/listProduct">Ürün Listesi</a>|
 		<%
-			Admin loginedAdmin =(Admin) MyUtils.getLoginedUser(session);
+			Admin loginedAdmin =(Admin) MyUtils.getLoginedAdmin(session);
 			if (loginedAdmin == null) {
-		%>
-  			<a href="${pageContext.request.contextPath}/userLogin">Giriş Yap</a>
-		<% } else { %>
-			<a href="${pageContext.request.contextPath}/adminInfo">Kullanıcı bilgileri</a> 
-			<a href="${pageContext.request.contextPath}/exit">Çıkış Yap</a>
+				Customer loginedCustomer =(Customer) MyUtils.getLoginedCustomer(session);
+				if(loginedCustomer!=null){
+		%>	
+			<a href="${pageContext.request.contextPath}/orderInfo">Sepetim</a>|
+			<a href="${pageContext.request.contextPath}/customerInfo">Profilim</a>|
+			<a href="${pageContext.request.contextPath}/customerExit">Çıkış Yap</a>
+			
+				<% } else { %>
+					<a href="${pageContext.request.contextPath}/userLogin">Giriş Yap</a>|
+					<a href="${pageContext.request.contextPath}/customerRegister">Kayıt Ekranı</a>|
+				<%} %>
+		<% } else { %>		
+			<a href="${pageContext.request.contextPath}/listCategory">Kategoriler </a> |
+			<a href="${pageContext.request.contextPath}/listPlatform">Platformlar </a> |
+			<a href="${pageContext.request.contextPath}/adminInfo">Admin Profili</a>|
+			<a href="${pageContext.request.contextPath}/adminExit">Çıkış Yap</a>
 		<%} %>
 
 	</div>

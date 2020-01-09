@@ -10,28 +10,29 @@
 	<jsp:include page="_header.jsp"></jsp:include>
 	<jsp:include page="_menu.jsp"></jsp:include>
 
-	<h3>Hoşgeldin : ${user.firstName}</h3>
+	<h3>Hoşgeldin : ${admin.firstName}</h3>
 	<h3>Kullanıcı Bilgilerini Düzenle</h3>
 
-		<form method="POST" action="${pageContext.request.contextPath}/editUser">
-			<input type="hidden" name="emailAddress" value="${user.emailAddress}" />
+		<form method="POST" action="${pageContext.request.contextPath}/editAdmin">
+			<input type="hidden" name="emailAddress" value="${admin.emailAddress}" />
 			<table>
 				<tr>
 					<td>Email : </td>
-					<td>${user.emailAddress}</td>
+					<td>${admin.emailAddress}</td>
 				</tr>
 				<tr>
 					<td>Adı : </td>
-					<td><input type="text" name="itemName" value="${user.firstName}" /></td>
+					<td><input type="text" name="firstName" value="${admin.firstName}" /></td>
 				</tr>
 				<tr>
 					<td>Soyadı : </td>
-					<td><input type="text" name="itemName" value="${user.lastName}" /></td>
+					<td><input type="text" name="lastName" value="${admin.lastName}" /></td>
 				</tr>
 				<tr>
 					<td>Şifre : </td>
-					<td><input type="text" name="price" value="${user.password}" /></td>
+					<td><input type="password" name="password" value="${admin.password}" /></td>
 				</tr>
+				
 				<tr>
 					<td colspan="2"><input type="submit" value="Kaydet" /> 
 					<a href="${pageContext.request.contextPath}/home">İptal Et</a></td>
