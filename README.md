@@ -4,7 +4,7 @@
 
 ### E-trade project created with Servlet and jsp.
 
-#### Developers
+#### Developers:
   - Mehmet PEKDEMIR (Back-end && Front-end)
   - M.Yusuf YUCEDAG (Back-end)
 
