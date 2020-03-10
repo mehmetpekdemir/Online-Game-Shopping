@@ -1,7 +1,18 @@
 # Online Game Shopping 
 
-### We have built a web application by using Servlet && Jsp.
+## We have built a web application by using Servlet && Jsp.
 
+### E-trade project created with Servlet and jsp.
+
+#### Developers
+  - Mehmet PEKDEMIR (Back-end && Front-end)
+  - M.Yusuf YUCEDAG (Back-end)
+
+#### Tech stack:
+  - Servlet && Jsp
+  - Html-Css-Bootstrap-Javascript
+  
+ ### Features
 
 ![banner resmi](https://github.com/mehmetpekdemir/Online-Game-Shopping/blob/master/Last-Version-Photos/home.png)
 
@@ -26,7 +37,3 @@
 ![banner resmi](https://github.com/mehmetpekdemir/Online-Game-Shopping/blob/master/Last-Version-Photos/basket.png)
 
 ![banner resmi](https://github.com/mehmetpekdemir/Online-Game-Shopping/blob/master/Last-Version-Photos/bill.png)
-<<<<<<< HEAD
-=======
-
->>>>>>> 2df3c6321d45cd6a2800ef59f470ba23912ee0e5
