@@ -1,7 +1,6 @@
 package com.handstand.filter;
 
 import java.io.IOException;
-
 import java.sql.SQLException;
 
 import javax.servlet.Filter;
@@ -15,18 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.handstand.entity.Admin;
-import com.handstand.service.impl.AdminServiceImpl;
+import com.handstand.entity.Customer;
+import com.handstand.service.AdminServiceImpl;
+import com.handstand.service.impl.CustomerServiceImpl;
+import com.handstand.util.AuthenticationHelper;
 import com.handstand.util.MyUtils;
 import com.mysql.jdbc.Connection;
 
 /**
  * 
- * @author MEHMET PEKDEMİR
+ * @author MEHMET PEKDEMIR , YUSUF YUCEDAG
  *
  */
+
 @WebFilter(filterName = "cookieFilter", urlPatterns = { "/*" })
 public class CookieFilter implements Filter {
-
 	private static final String COOKIE_CHECKED = "COOKIE_CHECKED";
 	private static final String CHECKED = "CHECKED";
 
@@ -37,33 +39,63 @@ public class CookieFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest request2 = (HttpServletRequest) request;
-		HttpSession session = request2.getSession();
+		String firstName = request.getParameter("firstName");
+		String emailAddress = request.getParameter("emailAddress");
+		String password = request.getParameter("password");
+		boolean isAdminCheck = AuthenticationHelper.isAdmin(emailAddress, password);
 
-		Admin adminInSession = (Admin) MyUtils.getLoginedAdmin(session);
-		if (adminInSession != null) {
-			session.setAttribute(COOKIE_CHECKED, CHECKED);
-			chain.doFilter(request, response);
-			return;
-		}
+		if (isAdminCheck = true && firstName == null) {
+			HttpServletRequest request2 = (HttpServletRequest) request;
+			HttpSession session = request2.getSession();
 
-		Connection connection = MyUtils.getStoredConnection(request);
-
-		String checked = (String) session.getAttribute(COOKIE_CHECKED);
-		if (checked == null && connection != null) {
-			String emailAddress = MyUtils.getAdminNameInCookie(request2);
-			try {
-				AdminServiceImpl adminService = new AdminServiceImpl();
-				Admin admin = adminService.findAdmin(emailAddress);
-				MyUtils.storeLoginedAdmin(session, admin);
-			} catch (SQLException sqlException) {
-				sqlException.printStackTrace();
-			} catch (ClassNotFoundException classNotFoundException) {
-				classNotFoundException.printStackTrace();
+			Admin adminInSession = (Admin) MyUtils.getLoginedAdmin(session);
+			if (adminInSession != null) {
+				session.setAttribute(COOKIE_CHECKED, CHECKED);
+				chain.doFilter(request, response);
+				return;
 			}
-			session.setAttribute(COOKIE_CHECKED, CHECKED);
-		}
 
+			Connection connection = MyUtils.getStoredConnection(request);
+
+			String checked2 = (String) session.getAttribute(COOKIE_CHECKED);
+			if (checked2 == null && connection != null) {
+				// String emailAddress2 = MyUtils.getAdminNameInCookie(request2);
+				try {
+					AdminServiceImpl adminServiceImpl = new AdminServiceImpl();
+					Admin admin = adminServiceImpl.findAdmin(emailAddress);
+					MyUtils.storeLoginedAdmin(session, admin);
+				} catch (SQLException sqlException) {
+					sqlException.printStackTrace();
+				} catch (ClassNotFoundException classNotFoundException) {
+					classNotFoundException.printStackTrace();
+				}
+				session.setAttribute(COOKIE_CHECKED, CHECKED);
+			}
+		} else if (emailAddress != null && isAdminCheck == false) {
+			HttpServletRequest requestDoFilter = (HttpServletRequest) request;
+			HttpSession session = requestDoFilter.getSession();
+			Customer customerInSession = (Customer) MyUtils.getLoginedCustomer(session);
+
+			if (customerInSession != null) {
+				session.setAttribute(COOKIE_CHECKED, CHECKED);
+				chain.doFilter(request, response);
+				return;
+			}
+			Connection connection = MyUtils.getStoredConnection(request);
+			String checked2 = (String) session.getAttribute(COOKIE_CHECKED);
+
+			if (connection != null && checked2 == null) {
+				// String emailAddress2 = MyUtils.getCustomerNameInCookie(requestDoFilter);
+				CustomerServiceImpl customerServiceImpl = new CustomerServiceImpl();
+				try {
+					Customer customer = customerServiceImpl.findCustomer(emailAddress, password);
+					MyUtils.storeLoginedCustomer(session, customer);
+				} catch (ClassNotFoundException | SQLException e) {
+					e.printStackTrace();
+				}
+				session.setAttribute(COOKIE_CHECKED, CHECKED);
+			}
+		}
 		chain.doFilter(request, response);
 	}
 

@@ -12,14 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.handstand.entity.Admin;
-import com.handstand.service.impl.AdminServiceImpl;
+import com.handstand.entity.Customer;
+import com.handstand.service.AdminServiceImpl;
+import com.handstand.service.impl.CustomerServiceImpl;
 import com.handstand.util.AuthenticationHelper;
 import com.handstand.util.CheckUtils;
 import com.handstand.util.MyUtils;
 
 /**
  * 
- * @author MEHMET PEKDEMIR
+ * @author MEHMET PEKDEMIR ,YUSUF YUCEDAG
  *
  */
 @WebServlet(urlPatterns = { "/userLogin" })
@@ -27,7 +29,8 @@ public class UserLoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String ADMIN = "admin";
-	private static final String ERROR_MESSAGE = "Kullanici adi veya sifreniz yanlıs.Lutfen tekrar deneyiniz.";
+	private static final String CUSTOMER = "customer";
+	private static final String ERROR_MESSAGE = "Kullanıcı adı veya şifreniz yanlış.Lütfen tekrar deneyiniz.";
 	private static final String ERROR = "errorMessage";
 
 	@Override
@@ -41,10 +44,10 @@ public class UserLoginServlet extends HttpServlet {
 		boolean check = AuthenticationHelper.isAdmin(emailAddress, password);
 
 		if (check) {
-			AdminServiceImpl adminService = new AdminServiceImpl();
+			AdminServiceImpl adminServiceImpl = new AdminServiceImpl();
 			Admin admin = null;
 			try {
-				admin = adminService.findAdmin(emailAddress, password);
+				admin = adminServiceImpl.findAdmin(emailAddress, password);
 			} catch (ClassNotFoundException | SQLException exception) {
 				exception.printStackTrace();
 			}
@@ -69,7 +72,35 @@ public class UserLoginServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/adminInfo");
 
 		} else {
-				//Burada müşteri girişi olacak .
+			// cutomerService ile customerDao yu çağırıp findCustomer fonk. çalıştırıyorum
+			CustomerServiceImpl customerServiceImpl = new CustomerServiceImpl();
+			Customer customer = null;
+			try {
+				customer = customerServiceImpl.findCustomer(emailAddress, password);
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+
+			if (customer == null) {
+				request.setAttribute(ERROR, ERROR_MESSAGE);
+				RequestDispatcher dispatcher = this.getServletContext()
+						.getRequestDispatcher("/WEB-INF/views/errorView.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
+			// oturumu alıyorum
+			HttpSession session = request.getSession();
+			// Giriş yapan customerı kaydediyorum
+			MyUtils.storeLoginedCustomer(session, customer);
+			request.setAttribute(CUSTOMER, customer);
+
+			if (remember) {
+				MyUtils.storeCustomerCookie(response, customer);
+			} else {
+				MyUtils.deleteCustomerCookie(response);
+			}
+
+			response.sendRedirect(request.getContextPath() + "/customerInfo");
 		}
 
 	}

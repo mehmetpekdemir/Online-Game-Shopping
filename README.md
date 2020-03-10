@@ -26,4 +26,7 @@
 ![banner resmi](https://github.com/mehmetpekdemir/Online-Game-Shopping/blob/master/Last-Version-Photos/basket.png)
 
 ![banner resmi](https://github.com/mehmetpekdemir/Online-Game-Shopping/blob/master/Last-Version-Photos/bill.png)
+<<<<<<< HEAD
+=======
 
+>>>>>>> 2df3c6321d45cd6a2800ef59f470ba23912ee0e5
